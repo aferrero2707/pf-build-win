@@ -43,6 +43,10 @@ packagedir=packages
 # unzip to here
 installdir=$HOME/.local/share/crossroad/roads/w64/w64-build
 
+if [ ! -e $installdir/bin/photoflow.exe ]; then
+	exit 1
+fi
+
 # jhbuild will download sources to here 
 #checkoutdir=source
 
