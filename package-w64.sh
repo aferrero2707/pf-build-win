@@ -181,9 +181,11 @@ rm -f $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
 cd $repackagedir/../
 zip -r $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
 
+ls -lh $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
+
 transfer $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
 
-exit
+exit 0
 
 # have to make in a subdir to make sure makensis does not grab other stuff
 echo building installer nsis/$photoflow_package-$photoflow_version-setup.exe
