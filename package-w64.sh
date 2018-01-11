@@ -30,7 +30,12 @@ mkdir -p /work/w64-build && cd /work/w64-build
 crossroad w64 w64-build --run=$TRAVIS_BUILD_DIR/windows/phf-build.sh
 
 photoflow_package=photoflow
-photoflow_version="w64-$(date +%Y%m%d)_$(date +%H%M)-git-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
+TARGET_SYS="w64"
+if [ x"$TRAVIS_USE_GTKMM3" = "xON" ]; then
+	TARGET_SYS="w64-gtk3"
+fi
+photoflow_version="${TARGET_SYS}-$(date +%Y%m%d)_$(date +%H%M)-git-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
+TRAVIS_USE_GTKMM3=${TRAVIS_USE_GTKMM3:-OFF}
 #photoflow_version=0.2.7
 #photoflow_version=$(cat checkout/PhotoFlow/VERSION | head -n 1)
 
