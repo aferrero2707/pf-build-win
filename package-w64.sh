@@ -164,12 +164,25 @@ cat > $repackagedir/etc/gtk-2.0/gtkrc <<EOF
 gtk-theme-name = "Clearlooks"
 EOF
 
-wine $repackagedir/bin/gdk-pixbuf-query-loaders.exe | sed -e "s%Z:$(pwd)/$repackagedir%..%g" > $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
-cat $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+#wine $repackagedir/bin/gdk-pixbuf-query-loaders.exe | sed -e "s%Z:$(pwd)/$repackagedir%..%g" > $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
+#cat $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 rm -rf $repackagedir/share/mime
 cp -a /usr/share/mime $repackagedir/share/mime
 rm $repackagedir/share/mime/application/vnd.ms-*
+
+mkdir -p $repackagedir/share/glib-2.0/schemas
+cp -a $installdir/share/glib-2.0/schemas/gschemas.compiled $repackagedir/share/glib-2.0/schemas
+
+apt-get install -y liblensfun-bin
+lensfun-update-data
+mkdir -p $repackagedir/share/lensfun
+cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
+
+(cd $repackagedir && \
+wget http://ftp.gnome.org/pub/gnome/sources/adwaita-icon-theme/3.26/adwaita-icon-theme-3.26.0.tar.xz && \
+tar xJf adwaita-icon-theme-3.26.0.tar.xz && cp -a adwaita-icon-theme-3.26.0/Adwaita $repackagedir/share/icons && \
+rm -rf adwaita-icon-theme-3.26.0*) || exit 1
 
 #exit
 
