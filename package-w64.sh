@@ -184,6 +184,11 @@ lensfun-update-data
 mkdir -p $repackagedir/share/lensfun
 cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
 
+(cd /work && rm -rf hicolor-icon-theme-0.* && \
+wget http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz && \
+tar xJf hicolor-icon-theme-0.17.tar.xz && cd hicolor-icon-theme-0.17 && \
+./configure --prefix=$repackagedir && make install && rm -rf hicolor-icon-theme-0.*) || exit 1
+
 (cd $repackagedir && \
 wget http://ftp.gnome.org/pub/gnome/sources/adwaita-icon-theme/3.26/adwaita-icon-theme-3.26.0.tar.xz && \
 tar xJf adwaita-icon-theme-3.26.0.tar.xz && cp -a adwaita-icon-theme-3.26.0/Adwaita $repackagedir/share/icons && \
