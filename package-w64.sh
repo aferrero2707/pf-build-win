@@ -188,7 +188,7 @@ cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
 wget http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz && \
 tar xJf hicolor-icon-theme-0.17.tar.xz && cd hicolor-icon-theme-0.17 && \
 ./configure --prefix=$repackagedir && make install && rm -rf hicolor-icon-theme-0.*) || exit 1
-echo "icons after hicolor installation:
+echo "icons after hicolor installation:"
 ls $repackagedir/share/icons
 echo ""
 
