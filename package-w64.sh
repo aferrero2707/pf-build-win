@@ -196,7 +196,7 @@ echo ""
 wget http://ftp.gnome.org/pub/gnome/sources/adwaita-icon-theme/3.26/adwaita-icon-theme-3.26.0.tar.xz && \
 tar xJf adwaita-icon-theme-3.26.0.tar.xz && cd adwaita-icon-theme-3.26.0 && \
 ./configure --prefix=$repackagedir && make install && rm -rf adwaita-icon-theme-3.26.0*) || exit 1
-echo "icons after adwaita installation:
+echo "icons after adwaita installation:"
 ls $repackagedir/share/icons
 echo ""
 
