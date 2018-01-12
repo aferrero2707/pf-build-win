@@ -188,11 +188,17 @@ cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
 wget http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz && \
 tar xJf hicolor-icon-theme-0.17.tar.xz && cd hicolor-icon-theme-0.17 && \
 ./configure --prefix=$repackagedir && make install && rm -rf hicolor-icon-theme-0.*) || exit 1
+echo "icons after hicolor installation:
+ls $repackagedir/share/icons
+echo ""
 
-(cd $repackagedir && \
+(cd /work && rm -rf adwaita-icon-theme-3.* && \
 wget http://ftp.gnome.org/pub/gnome/sources/adwaita-icon-theme/3.26/adwaita-icon-theme-3.26.0.tar.xz && \
-tar xJf adwaita-icon-theme-3.26.0.tar.xz && cp -a adwaita-icon-theme-3.26.0/Adwaita $repackagedir/share/icons && \
-rm -rf adwaita-icon-theme-3.26.0*) || exit 1
+tar xJf adwaita-icon-theme-3.26.0.tar.xz && cd adwaita-icon-theme-3.26.0 && \
+./configure --prefix=$repackagedir && make install && rm -rf adwaita-icon-theme-3.26.0*) || exit 1
+echo "icons after adwaita installation:
+ls $repackagedir/share/icons
+echo ""
 
 #exit
 
