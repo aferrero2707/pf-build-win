@@ -181,8 +181,10 @@ cp -a $installdir/share/glib-2.0/schemas/gschemas.compiled $repackagedir/share/g
 
 apt-get install -y liblensfun-bin
 lensfun-update-data
-mkdir -p $repackagedir/share/lensfun
-cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
+#mkdir -p $repackagedir/share/lensfun
+#cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/lensfun
+mkdir -p $repackagedir/share/photoflow/lensfun/version_1
+cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/photoflow/lensfun/version_1
 
 (cd /work && rm -rf hicolor-icon-theme-0.* && \
 wget http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz && \
