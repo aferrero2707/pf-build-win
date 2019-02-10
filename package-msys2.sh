@@ -187,7 +187,7 @@ sudo pacman --noconfirm -S zip || exit 1
 
 rm -f $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
 cd $repackagedir/../
-zip -q -r $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
+sudo zip -q -r $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
 #transfer $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
 
 ls -lh $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
