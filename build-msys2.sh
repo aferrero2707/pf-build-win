@@ -1,5 +1,6 @@
 #! /bin/bash
-sudo pacman --noconfirm -S wget || exit 1
+sudo pacman --noconfirm -Syu || exit 1
+sudo pacman --noconfirm -S wget wine lensfun zip || exit 1
 (sudo mkdir -p /work && sudo chmod a+w /work) || exit 1
 
 cd /work || exit 1
@@ -13,7 +14,7 @@ for PKG in mingw-w64-x86_64-libjpeg-turbo-1.5.3-1-any.pkg.tar.xz mingw-w64-x86_6
 	sudo pacman --noconfirm --config /etc/pacman-msys.conf -U "$PKG" || exit 1
 done
 
-
+sudo pacman --noconfirm --config /etc/pacman-msys.conf -Syu || exit 1
 sudo pacman --noconfirm --config /etc/pacman-msys.conf -S \
 mingw64/mingw-w64-x86_64-fftw mingw64/mingw-w64-x86_64-libtiff mingw64/mingw-w64-x86_64-lcms2 \
 mingw64/mingw-w64-x86_64-pugixml mingw64/mingw-w64-x86_64-libexif \

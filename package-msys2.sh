@@ -23,7 +23,7 @@ transfer()
 # unzip to here
 export installdir=/mingw64
 
-bash $TRAVIS_BUILD_DIR/windows/build-msys2.sh
+bash $TRAVIS_BUILD_DIR/windows/build-msys2.sh || exit 1
 
 photoflow_package=photoflow
 TARGET_SYS="w64"
