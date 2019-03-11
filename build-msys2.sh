@@ -84,6 +84,6 @@ echo "Compiling photoflow with USE_GTKMM3=${TRAVIS_USE_GTKMM3}"
  -DCMAKE_EXE_LINKER_FLAGS_RELEASE="'-s -O3'" \
  -DPugixml_INCLUDE_DIR="/msys2/mingw64/include/pugixml-1.9" \
  -DCMAKE_INSTALL_PREFIX=/mingw64 \
- -DCMAKE_BUILD_TYPE=Release -DBUNDLED_LENSFUN=OFF -DBUNDLED_LENSFUN_DB=ON \
+ -DCMAKE_BUILD_TYPE=Release -DBUNDLED_LENSFUN=OFF -DBUNDLED_LENSFUN_DB=ON -DOCIO_ENABLED=ON \
  -DUSE_GTKMM3=${TRAVIS_USE_GTKMM3} /sources && \
  make -j 1 && sudo make install) || exit 1
