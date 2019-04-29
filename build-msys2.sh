@@ -31,11 +31,12 @@ mkdir -p /work/w64-build/phf || exit 1
 cd /work/w64-build/phf || exit 1
 
 
-if [ ! -e vips-8.6.5 ]; then
-wget https://github.com/libvips/libvips/releases/download/v8.6.5/vips-8.6.5.tar.gz || exit 1
-rm -rf vips-8.6.5
-tar xzf vips-8.6.5.tar.gz || exit 1
-cd vips-8.6.5 || exit 1
+VIPS_VERSION=8.7.4
+if [ ! -e vips-${VIPS_VERSION} ]; then
+wget https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz || exit 1
+rm -rf vips-${VIPS_VERSION}
+tar xzf vips-${VIPS_VERSION}.tar.gz || exit 1
+cd vips-${VIPS_VERSION} || exit 1
 ./configure --host=x86_64-w64-mingw32 --prefix=/msys2/mingw64 --with-expat=/mingw64 || exit 1
 (make && sudo make install) || exit 1
 fi
