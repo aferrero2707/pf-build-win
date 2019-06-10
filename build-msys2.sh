@@ -1,6 +1,6 @@
 #! /bin/bash
 sudo pacman --noconfirm -Syu || exit 1
-sudo pacman --noconfirm -S wget wine lensfun zip || exit 1
+sudo pacman --noconfirm -S wget wine lensfun zip|| exit 1
 (sudo mkdir -p /work && sudo chmod a+w /work) || exit 1
 
 cd /work || exit 1
@@ -17,7 +17,7 @@ done
 sudo pacman --noconfirm --config /etc/pacman-msys.conf -Syu || exit 1
 sudo pacman --noconfirm --config /etc/pacman-msys.conf -S \
 mingw64/mingw-w64-x86_64-fftw mingw64/mingw-w64-x86_64-libtiff mingw64/mingw-w64-x86_64-lcms2 \
-mingw64/mingw-w64-x86_64-pugixml mingw64/mingw-w64-x86_64-libexif \
+mingw64/mingw-w64-x86_64-pugixml mingw64/mingw-w64-x86_64-libexif mingw64/mingw-w64-x86_64-exiv2 \
 mingw64/mingw-w64-x86_64-gtkmm mingw64/mingw-w64-x86_64-iconv \
 mingw64/mingw-w64-x86_64-expat mingw64/mingw-w64-x86_64-openexr \
 mingw64/mingw-w64-x86_64-pugixml mingw-w64-x86_64-opencolorio-git || exit 1
