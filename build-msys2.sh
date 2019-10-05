@@ -8,19 +8,20 @@ cd /work || exit 1
 (rm -f pacman-msys.conf && wget https://raw.githubusercontent.com/aferrero2707/docker-buildenv-mingw/master/pacman-msys.conf && sudo cp pacman-msys.conf /etc/pacman-msys.conf) || exit 1
 (rm -f Toolchain-mingw-w64-x86_64.cmake && wget https://raw.githubusercontent.com/aferrero2707/docker-buildenv-mingw/master/Toolchain-mingw-w64-x86_64.cmake && sudo cp Toolchain-mingw-w64-x86_64.cmake /etc/Toolchain-mingw-w64-x86_64.cmake) || exit 1
 
+sudo pacman --noconfirm --config /etc/pacman-msys.conf -Syu || exit 1
+
 for PKG in mingw-w64-x86_64-pugixml-1.9-2-any.pkg.tar.xz mingw-w64-x86_64-libjpeg-turbo-1.5.3-1-any.pkg.tar.xz mingw-w64-x86_64-lensfun-0.3.2-4-any.pkg.tar.xz mingw-w64-x86_64-gtk3-3.22.30-1-any.pkg.tar.xz mingw-w64-x86_64-gtkmm3-3.22.3-1-any.pkg.tar.xz; do
 	if [ -e "$PKG" ]; then continue; fi
 	wget http://repo.msys2.org/mingw/x86_64/"$PKG" || exit 1
 	sudo pacman --noconfirm --config /etc/pacman-msys.conf -U "$PKG" || exit 1
 done
 
-sudo pacman --noconfirm --config /etc/pacman-msys.conf -Syu || exit 1
 sudo pacman --noconfirm --config /etc/pacman-msys.conf -S \
 mingw64/mingw-w64-x86_64-fftw mingw64/mingw-w64-x86_64-libtiff mingw64/mingw-w64-x86_64-lcms2 \
-mingw64/mingw-w64-x86_64-pugixml mingw64/mingw-w64-x86_64-libexif mingw64/mingw-w64-x86_64-exiv2 \
+mingw64/mingw-w64-x86_64-libexif mingw64/mingw-w64-x86_64-exiv2 \
 mingw64/mingw-w64-x86_64-gtkmm mingw64/mingw-w64-x86_64-iconv \
 mingw64/mingw-w64-x86_64-expat mingw64/mingw-w64-x86_64-openexr \
-mingw64/mingw-w64-x86_64-pugixml mingw-w64-x86_64-opencolorio || exit 1
+mingw-w64-x86_64-opencolorio || exit 1
 
 (cd / && sudo rm -f mingw64 && sudo ln -s /msys2/mingw64 /mingw64) || exit 1
 export PKG_CONFIG=/usr/sbin/x86_64-w64-mingw32-pkg-config
