@@ -144,7 +144,7 @@ EOF
 
 sudo pacman --noconfirm -S wine || exit 1
 #wine $installdir/bin/gdk-pixbuf-query-loaders.exe | sed -e "s%^\"lib%..\\\\\\\lib%g" > $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache || exit 1
-wine $installdir/bin/gdk-pixbuf-query-loaders.exe > $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache || exit 1
+(cd $installdir/bin && wine./gdk-pixbuf-query-loaders.exe > $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache) || exit 1
 cat $repackagedir/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
 #exit
