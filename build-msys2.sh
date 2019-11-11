@@ -21,7 +21,7 @@ mingw64/mingw-w64-x86_64-fftw mingw64/mingw-w64-x86_64-libtiff mingw64/mingw-w64
 mingw64/mingw-w64-x86_64-libexif mingw64/mingw-w64-x86_64-exiv2 \
 mingw64/mingw-w64-x86_64-gtkmm mingw64/mingw-w64-x86_64-iconv \
 mingw64/mingw-w64-x86_64-expat mingw64/mingw-w64-x86_64-openexr \
-mingw-w64-x86_64-opencolorio || exit 1
+mingw-w64-x86_64-opencolorio mingw-w64-x86_64-yaml-cpp || exit 1
 
 (cd / && sudo rm -f mingw64 && sudo ln -s /msys2/mingw64 /mingw64) || exit 1
 export PKG_CONFIG=/usr/sbin/x86_64-w64-mingw32-pkg-config
