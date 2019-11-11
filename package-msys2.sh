@@ -25,12 +25,13 @@ export installdir=/mingw64
 
 bash $TRAVIS_BUILD_DIR/windows/build-msys2.sh || exit 1
 
-photoflow_package=photoflow
+photoflow_package=PhotoFlow
 TARGET_SYS="w64"
 if [ x"$TRAVIS_USE_GTKMM3" = "xON" ]; then
 	TARGET_SYS="w64-gtk3"
 fi
-photoflow_version="${TARGET_SYS}-$(date +%Y%m%d)_$(date +%H%M)-git-${TRAVIS_BRANCH}-${TRAVIS_COMMIT}"
+TRAVIS_COMMIT_SHORT=$(echo "${TRAVIS_COMMIT}" | head -c 5)
+photoflow_version="git_${TRAVIS_BRANCH}_${TARGET_SYS}_$(date +%Y%m%d)_$(date +%H%M)_${TRAVIS_COMMIT_SHORT}"
 TRAVIS_USE_GTKMM3=${TRAVIS_USE_GTKMM3:-OFF}
 #photoflow_version=0.2.7
 #photoflow_version=$(cat checkout/PhotoFlow/VERSION | head -n 1)
@@ -50,7 +51,7 @@ fi
 
 mingw_prefix=x86_64-w64-mingw32-
 
-repackagedir=/work/$photoflow_package-$photoflow_version
+repackagedir=/work/${photoflow_package}_${photoflow_version}
 
 echo "cp -a $installdir/PhotoFlow/src/rt/rtengine/camconst.json $installdir/bin/camconst.json"
 cp -a $installdir/PhotoFlow/src/rt/rtengine/camconst.json $installdir/bin/camconst.json
@@ -179,32 +180,32 @@ echo ""
 
 #exit
 
-#echo creating $photoflow_package-$photoflow_version.zip
-#rm -f $photoflow_package-$photoflow_version.zip
-#zip -r -qq $photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
+#echo creating ${photoflow_package}_${photoflow_version}.zip
+#rm -f ${photoflow_package}_${photoflow_version}.zip
+#zip -r -qq ${photoflow_package}_${photoflow_version}.zip ${photoflow_package}_${photoflow_version}
 
 sudo pacman --noconfirm -S zip || exit 1
 
-rm -f $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
+rm -f $TRAVIS_BUILD_DIR/${photoflow_package}_${photoflow_version}.zip
 cd $repackagedir/../
-sudo zip -q -r $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
-#transfer $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
+sudo zip -q -r $TRAVIS_BUILD_DIR/${photoflow_package}_${photoflow_version}.zip ${photoflow_package}_${photoflow_version}
+#transfer $TRAVIS_BUILD_DIR/${photoflow_package}_${photoflow_version}.zip
 
-ls -lh $TRAVIS_BUILD_DIR/$photoflow_package-$photoflow_version.zip
+ls -lh $TRAVIS_BUILD_DIR/${photoflow_package}_${photoflow_version}.zip
 
 exit 0
 
 # have to make in a subdir to make sure makensis does not grab other stuff
-echo building installer nsis/$photoflow_package-$photoflow_version-setup.exe
-( cd nsis ; rm -rf $photoflow_package-$photoflow_version ; 
-#unzip -qq -o ../$photoflow_package-$photoflow_version.zip ;
-rm -rf $photoflow_package-$photoflow_version
-mv ../$photoflow_package-$photoflow_version .
+echo building installer nsis/${photoflow_package}_${photoflow_version}-setup.exe
+( cd nsis ; rm -rf ${photoflow_package}_${photoflow_version} ; 
+#unzip -qq -o ../${photoflow_package}_${photoflow_version}.zip ;
+rm -rf ${photoflow_package}_${photoflow_version}
+mv ../${photoflow_package}_${photoflow_version} .
 #makensis -DVERSION=$photoflow_version $photoflow_package.nsi > makensis.log 
 )
 cd nsis
-rm -f $photoflow_package-$photoflow_version.zip
-zip -r $photoflow_package-$photoflow_version.zip $photoflow_package-$photoflow_version
-rm -rf $photoflow_package-$photoflow_version
-rm -f $photoflow_package-$photoflow_version-setup.zip
-#zip $photoflow_package-$photoflow_version-setup.zip $photoflow_package-$photoflow_version-setup.exe
+rm -f ${photoflow_package}_${photoflow_version}.zip
+zip -r ${photoflow_package}_${photoflow_version}.zip ${photoflow_package}_${photoflow_version}
+rm -rf ${photoflow_package}_${photoflow_version}
+rm -f ${photoflow_package}_${photoflow_version}-setup.zip
+#zip ${photoflow_package}_${photoflow_version}-setup.zip ${photoflow_package}_${photoflow_version}-setup.exe
