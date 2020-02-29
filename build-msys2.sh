@@ -32,6 +32,18 @@ mkdir -p /work/w64-build/phf || exit 1
 cd /work/w64-build/phf || exit 1
 
 
+#rm -rf libiptcdata-*
+if [ ! -e libiptcdata-1.0.4 ]; then
+curl -LO http://downloads.sourceforge.net/project/libiptcdata/libiptcdata/1.0.4/libiptcdata-1.0.4.tar.gz || exit 1
+tar xzf libiptcdata-1.0.4.tar.gz || exit 1
+cd libiptcdata-1.0.4 || exit 1
+./configure --host=x86_64-w64-mingw32 --prefix=/msys2/mingw64 || exit 1
+sed -i -e 's|iptc docs||g' Makefile || exit 1
+(make && sudo make install) || exit 1
+fi
+
+
+cd /work/w64-build/phf || exit 1
 VIPS_VERSION=8.7.4
 if [ ! -e vips-${VIPS_VERSION} ]; then
 wget https://github.com/libvips/libvips/releases/download/v${VIPS_VERSION}/vips-${VIPS_VERSION}.tar.gz || exit 1
