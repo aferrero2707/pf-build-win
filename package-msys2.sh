@@ -160,9 +160,11 @@ cp -a $installdir/share/glib-2.0/schemas/gschemas.compiled $repackagedir/share/g
 (cd /tmp && rm -f lensfun*.pkg.tar.xz && wget https://archive.archlinux.org/packages/l/lensfun/lensfun-0.3.2-9-x86_64.pkg.tar.xz &&
 sudo pacman --noconfirm -U lensfun-0.3.2-9-x86_64.pkg.tar.xz) || exit 1
 #sudo pacman --noconfirm -S lensfun || exit 1
-sudo lensfun-update-data
-mkdir -p $repackagedir/share/photoflow/lensfun/version_1
-cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/photoflow/lensfun/version_1
+
+echo "Updating lensfun database"
+sudo lensfun-update-data || exit 1
+mkdir -p $repackagedir/share/photoflow/lensfun/version_1 || exit 1
+cp -a /var/lib/lensfun-updates/version_1/* $repackagedir/share/photoflow/lensfun/version_1 || exit 1
 
 (cd /work && rm -rf hicolor-icon-theme-0.* && \
 wget http://icon-theme.freedesktop.org/releases/hicolor-icon-theme-0.17.tar.xz && \
